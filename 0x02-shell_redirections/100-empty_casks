@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -laR | tr -s " " | grep " 0 " | cut -d " " -f 9
