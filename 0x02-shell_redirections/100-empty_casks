@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -laR | tr -s " " | grep " 0 " | cut -d " " -f 9
+find . -empty | rev | cut -d '/' -f 1 | rev
