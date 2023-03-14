@@ -1,0 +1,2 @@
+#!/bin/bash
+grep -G "^[[:alpha:]]" /etc/ssh/ssh_config
