@@ -11,3 +11,5 @@ Project name	|	Description
 ---------------	|------------------
 0x00-shell_basics |	It focuses on the basic use of the shell, navigating and interacting with files and folders on a unix system.
 0x01-shell_permissions 	| It focuses on permissions (owner, group and others) of files and directories in a unix system.
+0x02-shell_redirections | It focuses on how to get, send and redirect Standard Inputs and Outputs; combining commangs and filters with redirections and working with special characters.
+0x03-shell_variables_expansions | It focuses on Shell variables, Initialization Files, arithmetic expressions and expansions
