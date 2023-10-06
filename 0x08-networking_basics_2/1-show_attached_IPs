@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# show the IPV4 IPs on this machine
+
+# Get the network interfaces
+interfaces=$(ifconfig -s | awk '{print $1}' | tail -n +2)
+
+# Iterate through each interface
+for interface in $interfaces; do
+	# Get the IPv4 address for the interface
+	ipv4_address=$(ifconfig "$interface" | awk '/inet /{print $2}')
+  
+	# Display the IPv4 address if it's not empty
+	if [ -n "$ipv4_address" ]; then
+		echo "$ipv4_address"
+	fi
+done
