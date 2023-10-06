@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# a script that configures the hosts of an ubuntu server
+
+cp /etc/hosts ~/hosts.new
+sed -i 's/^\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}\tlocalhost/127.0.0.2\tlocalhost/' ~/hosts.new
+sed -i '/^\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}\t.*/a 8.8.8.8\tfacebook.com' ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
