@@ -11,6 +11,6 @@ END {
 		split(key, parts, SUBSEP)
 		ip = parts[1]
 		status = parts[2]
-		print count[key] " " ip " " status
+		print "    " count[key] " " ip " " status
 	}
 }' apache-access.log | sort -nr
