@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 # This script installs nginx on ubuntu server
 
+sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install -y nginx
 sudo ufw allow 'Nginx HTTP'
 echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
 line="\\\trewrite ^/redirect_me http://edoka.tech permanent;"
 sudo sed -i "26i $line" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/error-page.html
+sudo sed -i "38i\\\terror_page 404 /error-page.html;" /etc/nginx/sites-available/default
 sudo service nginx restart
