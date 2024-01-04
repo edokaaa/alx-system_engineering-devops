@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script fixes a problem with the apacher server.
+
+service apache2 start
