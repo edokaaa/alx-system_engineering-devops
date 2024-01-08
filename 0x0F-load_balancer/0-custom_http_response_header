@@ -1,9 +1,8 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 # A script that configure a custome http response header on a nginx webserver.
 
 sudo apt -y update
 sudo apt -y install nginx ufw
 sudo ufw allow 'Nginx HTTP'
-line="\\\tadd_header X-Served-By \$hostname always;"
-sudo sed -i "54i $line" /etc/nginx/sites-available/default
+sudo sed -i "/location \/ {/ a\\\\tadd_header X-Served-By \$hostname always;" /etc/nginx/sites-available/default
 sudo service nginx restart
