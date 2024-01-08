@@ -1,0 +1,6 @@
+#/usr/bin/env bash
+# A script that configure a custome http response header on a nginx webserver.
+
+line="\\\tadd_header X-Served-By \$hostname always;"
+sudo sed -i "53i $line" /etc/nginx/sites-available/default
+sudo service nginx restart
