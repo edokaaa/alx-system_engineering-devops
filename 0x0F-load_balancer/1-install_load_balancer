@@ -1,0 +1,29 @@
+#!/usr/bin/bash env
+# A script that configure HAproxy on my lb server.
+
+# install haproxy
+sudo apt-get install --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.8
+sudo apt-get install haproxy=2.8.\*
+
+# enable
+
+sudo echo "ENABLED=1" >> /etc/default/haproxy
+# duplicate config file
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bk
+
+printf %s "
+listen 331620-lb-01
+	bind 0.0.0.0:80
+	mode http
+	stats enable
+	stats uri /haproxy?stats
+	stats realm Strictly\ Private
+	balance roundrobin
+	option httpclose
+	option forwardfor
+	server 331620-web-01 54.237.93.197:80 check
+	server 331620-web-02 54.145.238.213:80 check
+" >> /etc/haproxy/haproxy.cfg
+
+service haproxy restart
