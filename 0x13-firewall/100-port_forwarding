@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# A script that configures ufw to redirect port 8080/tcp to port 80/tcp
+
+sudo ufw allow 8080/tcp
+sudo ufw route allow proto tcp from any to any port 8080
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+sudo ufw disable
+sudo ufw enable
