@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # A script tha configures a server to debug and correctly start nginx.
 
-sudo apt remove nginx
-sudo apt install -y nginx ufw
-sudo ufw allow 'Nginx HTTP'
-sudo service nginx restart
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
