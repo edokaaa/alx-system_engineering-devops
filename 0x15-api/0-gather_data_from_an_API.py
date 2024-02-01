@@ -29,7 +29,7 @@ def user_todos(user_id):
         print("User not found")
         exit(1)
 
-    print("Employee {} is done with tasks({}/{})".format(
+    print("Employee {} is done with tasks({}/{}):".format(
         user["name"], len(completed), total_task))
     for item in completed:
         print("\t {}".format(item))
