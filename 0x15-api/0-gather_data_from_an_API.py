@@ -1,11 +1,17 @@
 #!/usr/bin/python3
 """A script that gathers data from an api."""
 
-import sys
 import requests
+import sys
 
-user_id = int(sys.argv[1])
-todo_url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(user_id)
+try:
+    user_id = int(sys.argv[1])
+except ValueError:
+    print("User ID must be integer")
+    exit(1)
+
+todo_url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(
+    user_id)
 user_url = "https://jsonplaceholder.typicode.com/users/{}".format(user_id)
 
 todo_list = requests.get(todo_url).json()
@@ -21,9 +27,9 @@ try:
     username = user["name"]
 except KeyError as e:
     print("User not found")
-    exit (1)
+    exit(1)
 
-print("Employee {} is done with tasks({}/{})".format(user["name"], len(completed), total_task))
+print("Employee {} is done with tasks({}/{})".format(
+    user["name"], len(completed), total_task))
 for item in completed:
     print("\t {}".format(item))
-
