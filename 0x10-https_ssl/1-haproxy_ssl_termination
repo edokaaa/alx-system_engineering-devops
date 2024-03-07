@@ -31,5 +31,5 @@ frontend www-https
 
 backend www-backend-https
 	balance roundrobin
-	server 331620-web-01 54.237.93.197:80 check
-	server 331620-web-02 54.145.238.213:80 check
+	server 331620-web-01 52.86.200.161:80 check
+	server 331620-web-02 52.3.253.172:80 check
