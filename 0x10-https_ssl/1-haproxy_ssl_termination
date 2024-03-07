@@ -25,7 +25,9 @@ defaults
 	errorfile 504 /etc/haproxy/errors/504.http
 
 frontend www-https
-	bind *:443 ssl crt /etc/letsencrypt/live/www.edoka.tech/fullchain.pem
+	bind *:80
+	bind *:443 ssl crt /etc/haproxy/certs/www.edoka.tech.pem
+	redirect scheme https code 301 if !{ ssl_fc }
 	stats uri /haproxy?stats
 	default_backend www-backend-https
 

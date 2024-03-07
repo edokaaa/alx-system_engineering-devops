@@ -24,17 +24,14 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend www-http
-	bind *:80
-	mode http
-	redirect scheme https code 301 if !{ ssl_fc }
-
 frontend www-https
-	bind *:443 ssl crt /etc/letsencrypt/live/www.edoka.tech/fullchain.pem
+	bind *:80
+	bind *:443 ssl crt /etc/haproxy/certs/www.edoka.tech.pem
+	redirect scheme https code 301 if !{ ssl_fc }
 	stats uri /haproxy?stats
 	default_backend www-backend-https
 
 backend www-backend-https
 	balance roundrobin
-	server 331620-web-01 54.237.93.197:80 check
-	server 331620-web-02 54.145.238.213:80 check
+	server 331620-web-01 52.86.200.161:80 check
+	server 331620-web-02 52.3.253.172:80 check
