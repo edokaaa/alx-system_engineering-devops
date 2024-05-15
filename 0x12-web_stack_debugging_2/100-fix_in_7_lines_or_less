@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# A script that runs whoami on any user passed as input
+if [ $# -gt 0 ]
+    then
+    sudo -u "$1" whoami
+fi
