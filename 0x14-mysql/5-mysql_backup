@@ -6,11 +6,10 @@ then
     exit 1
 fi
 
-password="$1"
 current_date=$(date +"%d-%m-%Y")
 
 # generate backup
-mysqldump -u root -p "$password" -A > backup.sql
+mysqldump -u root --password="$1" -A > backup.sql 2>/dev/null
 
 # compress backup
 tar -czvf "$current_date".tar.gz backup.sql
