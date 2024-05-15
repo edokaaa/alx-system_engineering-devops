@@ -1,8 +1,19 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 # Run Nginx as nginx and make it listen on port 8080
 
-sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
-sed -i "s/80/8080/g" /etc/nginx/sites-available/default
-chmod 644 /etc/nginx/nginx.conf
-pkill apache2
-sudo -u nginx service nginx start
+# add user nginx if it doesn't exist
+if ! id "nginx" &>/dev/null;
+then
+    sudo useradd -r -s /sbin/nologin nginx
+fi
+
+# grant necessary permission
+sudo chown -R nginx:nginx /var/log/nginx
+sudo chown -R nginx:nginx /var/lib/nginx
+
+# edit nginx configuration
+sudo sed -i.bak "s/user www-data/user nginx/" /etc/nginx/nginx.conf
+sudo sed -i.bak "s/80/8080/g" /etc/nginx/sites-available/default
+
+# restart nginx
+sudo service nginx restart
