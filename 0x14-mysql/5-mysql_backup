@@ -10,7 +10,7 @@ password="$1"
 current_date=$(date +"%d-%m-%Y")
 
 # generate backup
-sudo mysqldump -u root -p "$password" -A > backup.sql
+mysqldump -u root -p "$password" -A > backup.sql
 
 # compress backup
 tar -czvf "$current_date".tar.gz backup.sql
