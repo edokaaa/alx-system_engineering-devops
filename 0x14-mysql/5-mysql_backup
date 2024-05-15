@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# a script that backs up a mysql database.
+
+if [ "$#" -ne 1 ]
+then
+    exit 1
+fi
+
+password="$1"
+current_date=$(date +"%d-%m-%Y")
+
+# generate backup
+sudo mysqldump -u root -p "$password" -A > backup.sql
+
+# compress backup
+tar -czvf "$current_date".tar.gz backup.sql
+
+exit 0
