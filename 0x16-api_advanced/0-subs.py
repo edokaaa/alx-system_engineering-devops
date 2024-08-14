@@ -15,7 +15,8 @@ def number_of_subscribers(subreddit):
         "User-agent": "ubuntu:alxse:v1.0 (by /u/edokadev)"
     }
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    res = requests.get(url, headers=headers)
+    res = requests.get(url, headers=headers,
+                       allow_redirects=False)
     data = res.json().get('data')
 
     if 'subscribers' in data:
