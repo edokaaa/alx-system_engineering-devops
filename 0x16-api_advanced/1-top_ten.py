@@ -14,13 +14,13 @@ of the first 10 hot posts listed for a given subreddit.
     headers = {
         "User-agent": "ubuntu:alxse:v1.0 (by /u/edokadev)"
     }
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/hot.json?limit=9".format(subreddit)
     res = requests.get(url, headers=headers,
                        allow_redirects=False)
     if res.status_code == 200:
-        data = res.json().get('data', {}).get('children', [])
+        posts = res.json().get('data', {}).get('children', [])
 
-        for i in range(10):
-            print(data[i].get('data', {}).get('title'))
+        for post in posts:
+            print(post['data']['title'])
     else:
         print(None)
