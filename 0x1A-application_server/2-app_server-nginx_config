@@ -1,0 +1,20 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	rewrite ^/redirect_me http://edoka.tech permanent;
+	error_page 404 /error-page.html;
+
+	server_name _;
+
+	location / {
+		add_header X-Served-By $hostname always;
+		include proxy_params;
+		try_files $uri $uri/ =404;
+	}
+
+	location /airbnb-onepage/ {
+		add_header X-Served-By $hostname always;
+		proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
+	}
+}
